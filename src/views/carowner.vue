@@ -52,7 +52,7 @@
     <van-cell-group class="zj">
       <p class="title">上传证件</p>
       <div class="list">
-        <van-uploader :after-read="afterRead" />
+        <van-uploader  />
       </div>
     </van-cell-group>
 

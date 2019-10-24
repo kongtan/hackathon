@@ -4,7 +4,7 @@
       <div v-show="show" class="modal-content">
         <p class="tips">为了更好的提供服务，建议先选择您的身份，后期您也可以在设置里更改身份。</p>
         <div class="btn">
-          <van-button plain hairline type="info" class="carowner btncls">我是车主</van-button>
+          <van-button plain hairline type="info" class="carowner btncls" @click="carowner">我是车主</van-button>
           <van-button plain hairline type="info" class="passenger btncls">我是乘客</van-button>
         </div>
         <p class="skip">跳过</p>
@@ -18,6 +18,11 @@ export default {
     return {
       show: true
     };
+  },
+  methods: {
+    carowner: function() {
+      location.href = "/#/carowner"
+    }
   }
 };
 </script>
@@ -47,13 +52,13 @@ export default {
       padding: 20px 10px 10px;
       -webkit-box-pack: center;
       .passenger {
-          margin-left: 10px;
+        margin-left: 10px;
       }
     }
-    .skip{
-        margin-top: 20px;
-        font-size: 14px;
-        color: #1989fa;
+    .skip {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #1989fa;
     }
   }
 }
