@@ -18,7 +18,7 @@
         </van-col>
       </van-row>
       <div class="lists">
-        <div class="list">
+        <div class="list border_t">
           <div class="address border_b">
             <div class="model">
               <p>8：00</p>
@@ -31,7 +31,10 @@
             </div>
           </div>
           <div class="user border_b">
-            <p>乘客：{{"王伟"}} 需求：{{"1"}}个座位</p>
+              <van-row type="flex" justify="space-bteween" class="user-info">
+                <van-col span="12">乘客：{{"王伟"}}</van-col>
+                <van-col span="12">需求：{{"1"}}个座位</van-col>
+              </van-row>
             <p>备注：{{"1个座位、希望找老司机、开车不抽烟的"}}</p>
           </div>
         </div>
@@ -54,17 +57,17 @@
     </van-row>
     <van-popup v-model="showAdd" closeable position="bottom" :style="{ height: '20%' }">
       <div class="edit" @touchstart="showAdd=false">
-          <van-row type="flex" justify="space-around">
-        <van-col span="6">
-          <van-icon name="logistics" />
-          <p>人找车</p>
-        </van-col>
-        <van-col span="6">
-          <van-icon name="edit" />
-          <p>车找人</p>
-          <div></div>
-        </van-col>
-      </van-row>
+        <van-row type="flex" justify="space-around">
+          <van-col span="6" @click="window.location.href='/#/ptc'">
+            <van-icon name="logistics" />
+            <p>人找车</p>
+          </van-col>
+          <van-col span="6">
+            <van-icon name="friends-o" />
+            <p>车找人</p>
+            <div></div>
+          </van-col>
+        </van-row>
       </div>
     </van-popup>
   </div>
@@ -92,12 +95,19 @@ export default {
   right: 0;
   bottom: 0;
 }
+.bar{
+    -webkit-box-flex: 0;
+}
 .main {
   -webkit-box-flex: 1;
   width: 100%;
+  display: -webkit-box;
+  /* autoprefixer: ignore next */
+  -webkit-box-orient: vertical;
 }
 .filter {
   background: #fff;
+  -webkit-box-flex: 0;
 }
 .sooner {
   display: -webkit-box;
@@ -105,9 +115,13 @@ export default {
   -webkit-box-pack: just;
 }
 .lists {
+    -webkit-box-flex: 1;
+    overflow: scroll;
+    padding-top: 10px;
 }
 .list {
   background: #fff;
+  margin-bottom: 10px;
 }
 .address {
   display: -webkit-box;
@@ -132,8 +146,11 @@ export default {
   text-align: left;
   font-size: 14px;
 }
-.user p:nth-of-type(1) {
+.user-info {
   margin-bottom: 6px;
+}
+.user-info div:nth-of-type(2){
+    text-align: right;
 }
 .bottom {
   width: 100%;
@@ -149,16 +166,15 @@ export default {
 .bottom-list p {
   font-size: 14px;
 }
-.bottom-list:nth-of-type(1) p{
-    color: #1989fa;
+.bottom-list:nth-of-type(1) p {
+  color: #1989fa;
 }
-.edit{
-    width: 100%;
-    height: 100%;
-    display: -webkit-box;
-     /* autoprefixer: ignore next */
+.edit {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  /* autoprefixer: ignore next */
   -webkit-box-orient: vertical;
   -webkit-box-pack: center;
-
 }
 </style>   

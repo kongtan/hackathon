@@ -75,6 +75,18 @@ const routes = [
     // route level code-splitting
     component: () => import(/* webpackChunkName: "ptc" */ '../views/ptc.vue')
   },
+  {
+    path: '/pfc',
+    name: 'pfc',
+    // route level code-splitting
+    component: () => import(/* webpackChunkName: "pfc" */ '../views/pfc.vue')
+  },
+  {
+    path: '/cfp',
+    name: 'cfp',
+    // route level code-splitting
+    component: () => import(/* webpackChunkName: "cfp" */ '../views/cfp.vue')
+  },
 ]
 
 const router = new VueRouter({
