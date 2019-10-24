@@ -51,6 +51,18 @@ const routes = [
     // route level code-splitting
     component: () => import(/* webpackChunkName: "identity" */ '../views/identity.vue')
   },
+  {
+    path: '/carowner',
+    name: 'carowner',
+    // route level code-splitting
+    component: () => import(/* webpackChunkName: "carowner" */ '../views/carowner.vue')
+  },
+  {
+    path: '/reviewcert',
+    name: 'reviewcert',
+    // route level code-splitting
+    component: () => import(/* webpackChunkName: "reviewcert" */ '../views/reviewcert.vue')
+  },
 ]
 
 const router = new VueRouter({
