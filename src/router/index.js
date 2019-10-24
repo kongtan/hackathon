@@ -69,6 +69,12 @@ const routes = [
     // route level code-splitting
     component: () => import(/* webpackChunkName: "carowner" */ '../views/carowner.vue')
   },
+  {
+    path: '/ptc',
+    name: 'ptc',
+    // route level code-splitting
+    component: () => import(/* webpackChunkName: "ptc" */ '../views/ptc.vue')
+  },
 ]
 
 const router = new VueRouter({

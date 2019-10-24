@@ -83,7 +83,7 @@
   :style="{ height: '264px' }"
 >
 
-</van-popup>>
+</van-popup>
 
 <van-popup
   v-model="showTime"
