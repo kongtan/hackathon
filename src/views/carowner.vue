@@ -2,7 +2,6 @@
   <div class="main">
     <van-cell-group class="name">
       <van-field
-        v-model="username"
         required
         clearable
         label="车主姓名"
@@ -11,7 +10,6 @@
         @click-right-icon="$toast('question')"
       />
       <van-field
-        v-model="username"
         required
         clearable
         label="手机号"
@@ -22,7 +20,6 @@
     </van-cell-group>
     <van-cell-group class="che">
       <van-field
-        v-model="username"
         required
         clearable
         label="车型"
@@ -31,7 +28,6 @@
         @click-right-icon="$toast('说明信息')"
       />
       <van-field
-        v-model="username"
         required
         clearable
         label="车牌号"
@@ -40,7 +36,6 @@
         @click-right-icon="$toast('说明信息')"
       />
       <van-field
-        v-model="username"
         required
         clearable
         label="身份证号"
@@ -51,9 +46,24 @@
     </van-cell-group>
     <van-cell-group class="zj">
       <p class="title">上传证件</p>
-      <div class="list">
-        <van-uploader  />
-      </div>
+      <ul class="list">
+        <li :style="{width:wid}">
+          <van-uploader />
+          <p>驾驶证</p>
+        </li>
+        <li :style="{width:wid}">
+          <van-uploader />
+          <p>行驶证</p>
+        </li>
+        <li :style="{width:wid}">
+          <van-uploader />
+          <p>身份证正面</p>
+        </li>
+        <li :style="{width:wid}">
+          <van-uploader />
+          <p>身份证反面</p>
+        </li>
+      </ul>
     </van-cell-group>
 
     <div class="submit">
@@ -65,9 +75,13 @@
 export default {
   data() {
     return {
-      username: ""
+      wid: ""
     };
-  }
+  },
+  created() {
+      let screenW = $(window).width();
+      this.wid = (screenW-42)/2 + 'px';
+  },
 };
 </script>
 <style scoped lang="scss">
@@ -85,6 +99,13 @@ export default {
     }
     .list {
       padding: 20px;
+      li {
+        display: inline-block;
+        p {
+          font-size: 12px;
+          color: #999;
+        }
+      }
     }
   }
   .submit {
