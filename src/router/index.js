@@ -45,7 +45,12 @@ const routes = [
     // route level code-splitting
     component: () => import(/* webpackChunkName: "search" */ '../views/search.vue')
   },
-  
+  {
+    path: '/identity',
+    name: 'identity',
+    // route level code-splitting
+    component: () => import(/* webpackChunkName: "identity" */ '../views/identity.vue')
+  },
 ]
 
 const router = new VueRouter({
