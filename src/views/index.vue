@@ -39,7 +39,7 @@
     </div>
     <van-row type="flex" justify="space-around" class="bottom">
       <van-col span="6" class="bottom-list">
-        <van-icon name="bars" />
+        <van-icon name="friends" />
         <p>拼车</p>
       </van-col>
       <van-col span="6" @click="showAdd=true" class="add bottom-list">
@@ -53,7 +53,7 @@
       </van-col>
     </van-row>
     <van-popup v-model="showAdd" closeable position="bottom" :style="{ height: '20%' }">
-      <div class="edit">
+      <div class="edit" @touchstart="showAdd=false">
           <van-row type="flex" justify="space-around">
         <van-col span="6">
           <van-icon name="logistics" />

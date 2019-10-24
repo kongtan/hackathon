@@ -51,6 +51,18 @@ const routes = [
     // route level code-splitting
     component: () => import(/* webpackChunkName: "identity" */ '../views/identity.vue')
   },
+  {
+    path: '/releaseResult',
+    name: 'releaseResult',
+    // route level code-splitting
+    component: () => import(/* webpackChunkName: "releaseResult" */ '../views/releaseResult.vue')
+  },
+  {
+    path: '/ptc',
+    name: 'ptc',
+    // route level code-splitting
+    component: () => import(/* webpackChunkName: "ptc" */ '../views/ptc.vue')
+  },
 ]
 
 const router = new VueRouter({
