@@ -23,8 +23,24 @@ export default {
     carowner() {
       this.bridgeFnc.openNewUrl(location.origin + "/#/carowner");
     },
-    index() {      
+    index() {
+      this.setPassager();
       this.bridgeFnc.openNewUrl(location.origin + "/#/index");
+    },
+    setPassager() {
+      let currUser = JSON.parse(localStorage.getItem("_userInfo"));
+      this.$post("http://10.102.144.75:8022/api/UserInfo/Post", {
+        UId: currUser.UId,
+        UIHomeAddress: "",
+        UIWorkAddress: "",
+        UIHomeLat: "",
+        UIHomeLon: "",
+        UIWorkLat: "",
+        UIWorkLon: "",
+        UIRole: "0"
+      }).then(data => {
+        
+      });
     }
   }
 };
