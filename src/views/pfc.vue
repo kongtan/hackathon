@@ -1,29 +1,31 @@
 <template>
   <div>
-    <div class="list border_t" v-if="true">
+      <template v-if="lists.length>0">
+    <div class="list border_t" v-for="(item,index) in lists" :key="index">
       <div class="address border_b">
         <div class="address-main">
-          <p class="address-time">10/28 8:00</p>
+          <p class="address-time">{{item.SStartTime}}</p>
           <div class="ad">
-            <p>青剑湖花园南门</p>
+            <p>{{item.SStartAddress}}</p>
             <img src="//pic5.40017.cn/03/000/2b/ba/rBANB12x7GOAGzBLAAAEEGTk4K8756.png" />
-            <p>同程大厦</p>
+            <p>{{item.SEndAddress}}</p>
           </div>
         </div>
         <van-button type="default" class="address-button" @click="takeOrders">搭车</van-button>
       </div>
       <div class="usr border_b">
         <div class="usr-info">
-          <p>车主：{{'王伟'}}</p>
-          <p>空余座位：{{'1'}}个座位</p>
+          <p>车主：{{item.NickName}}</p>
+          <p>空余座位：{{item.SCount}}个座位</p>
           <p>
             费用：
-            <font>¥{{'10'}}/人</font>
+            <font>¥{{item.SPrice}}/人</font>
           </p>
         </div>
-        <p>备注：走东环直达，附近的可以联系我</p>
+        <p>备注：{{item.SRemark}}</p>
       </div>
     </div>
+      </template>
     <div class="no-result" v-else>
       <p>未找到符合条件的司机~</p>
       <p>你可以去发布约车信息</p>
@@ -33,8 +35,18 @@
 </template>
 <script>
 export default {
+    data(){
+        return {
+            lists:[]
+        }
+    },
   created() {
     this.bridgeFnc.setBar("人找车");
+    this.$post('http://10.102.144.75:8022/api/Schedu/GetSchedu',{"startLat":this.commonFnc.getQueryString("startLat"),"startLon":this.commonFnc.getQueryString("startLon"),"endLat":this.commonFnc.getQueryString("endLat"),"endLon":this.commonFnc.getQueryString("endLon"),"startTime":this.commonFnc.getQueryString("startTime"),"type":"1"}).then(data=>{
+          if(data.HackBody&&data.HackBody.length>0){
+              this.lists=data.HackBody;
+          }
+      })
   },
   methods: {
     takeOrders() {
@@ -54,7 +66,7 @@ export default {
             this.bridgeFnc.openNewUrl(
               window.location.origin +
                 window.location.pathname +
-                "#/orderdetial"
+                "#/orderdetail"
             );
           }
         }

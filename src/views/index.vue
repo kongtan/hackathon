@@ -95,8 +95,8 @@ export default {
     };
   },
   created() {
+      this.userInfo=JSON.parse(window.localStorage._userInfo);
     this.setBar();
-    this.$post('http://10.102.144.75:8022/api/member/post',JSON.stringify({"workNum":"07279","password":"123"})).then(data=>{console.log(data)})
   },
   methods: {
     setBar() {
@@ -128,11 +128,13 @@ export default {
         this.$toast("请将出发时间填写完整");
         return;
       }
+
       let url =
         window.location.origin +
         window.location.pathname +
-        "?start=xxx&end=xxx&time=xxx#/" +
+        "?startLat="+this.start.location.lat+"&startLon="+this.start.location.lng+"&endLat="+this.end.location.lat+"&endLon="+this.end.location.lng+"&startTime="+encodeURIComponent(this.time.replace(/-/g,'/'))+"#/"+
         (active == 0 ? "pfc" : "cfp");
+
       this.bridgeFnc.openNewUrl(url);
     },
     topc(type) {

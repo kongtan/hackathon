@@ -1,14 +1,14 @@
 <template>
     <div>
         <div class="head border_t border_b">
-            <img src="//img3.duitang.com/uploads/item/201507/23/20150723115018_ma428.thumb.700_0.jpeg" >
+            <img :src="userInfo.UPhoto" >
             <div class="usr">
                 <div>
-                    <p>王伟</p>
+                    <p>{{userInfo.UNick}}</p>
                     <p>司机</p>
                     <p>切换身份></p>
                 </div>
-                <p>ww36642</p>
+                <p>{{userInfo.UWorkNumber}}</p>
             </div>
         </div>
         <div class="main border_t">
@@ -34,6 +34,11 @@
 </template>
 <script>
 export default {
+    data(){
+        return {
+            userInfo:JSON.parse(window.localStorage._userInfo)
+        }
+    },
     created(){
         this.bridgeFnc.setBar('我的');
     }

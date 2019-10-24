@@ -10,7 +10,7 @@
           </div>
           <p class="desc">
             你发布的约车信息已被死机接单啦！
-            <font>点击查看详情</font>
+            <font @click="detail()">点击查看详情</font>
           </p>
         </div>
       </div>
@@ -25,6 +25,15 @@ export default {
   },
   created() {
     this.bridgeFnc.setBar("消息通知");
+  },
+  methods:{
+      detail(){
+          this.bridgeFnc.openNewUrl(
+              window.location.origin +
+                window.location.pathname +
+                "#/orderdetail"
+            );
+      }
   }
 };
 </script>

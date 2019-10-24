@@ -35,10 +35,11 @@
         placeholder="请输入愿意承担的车费（元）"
         @click="showKey=true;keyType=1"
         class="border_b"
+        style="font-size:11px;"
       />
     </div>
     <div class="user">
-      <van-field v-model="usrName" readonly label="乘客姓名" class="border_b" />
+      <van-field v-model="userInfo.UNick" readonly label="乘客姓名" class="border_b" />
       <van-field
         v-model="phone"
         readonly
@@ -96,10 +97,9 @@
 export default {
   data() {
     return {
+      userInfo:JSON.parse(window.localStorage._userInfo),
       start:{},
       end:{},
-      usrName: "王伟",
-      username: "",
       message: "",
       showKey: false,
       phone: "",
@@ -131,11 +131,34 @@ export default {
     },
     submit(){
         if(!this.start|| !this.start.name) {this.$toast('请将出发地填写完整'); return;}
-        if(!this.end|| !this.start.end) {this.$toast('请将目的地填写完整'); return;}
+        if(!this.end|| !this.end.name) {this.$toast('请将目的地填写完整'); return;}
         if(!this.time) {this.$toast('请将出发时间填写完整'); return;}
         if(!this.price) {this.$toast('请将愿付费用填写完整'); return;}
         if(!this.phone&&this.phone.length==11) {this.$toast('请将手机号填写完整'); return;}
-          this.bridgeFnc.openAndCloseUrl(window.location.origin+window.location.pathname+'?type=ctp#/releaseResult')
+        this.$post("http://10.102.144.75:8022/api/Schedu/AddSchedu", {
+        userid: this.userInfo.UId,
+        type: "1",
+        startAddress: this.start.name,
+        endAddress: this.end.name,
+        startLat: this.start.location.lat,
+        endLon:  this.end.location.lng,
+        endLat:  this.end.location.lat,
+        startLon: this.start.location.lng,
+        remark: this.message,
+        startTime: this.time.replace(/-/g,'/'),
+        status: "0",
+        count: this.count,
+        price: this.price
+      }).then(data => {
+        if (data.HackBody) {
+          this.bridgeFnc.openAndCloseUrl(
+            window.location.origin +
+              window.location.pathname +
+              "?type=ptc#/releaseResult"
+          );
+        }
+         else this.$toast('发布失败，再试一试~');
+      });
       },
     dateFtt(fmt, date) {
       var o = {
