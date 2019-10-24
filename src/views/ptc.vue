@@ -122,14 +122,8 @@ export default {
   },
   methods: {
     submit() {
-      if (!this.start) {
-        this.$toast("请将出发地填写完整");
-        return;
-      }
-      if (!this.end) {
-        this.$toast("请将目的地填写完整");
-        return;
-      }
+      if(!this.start|| !this.start.name) {this.$toast('请将出发地填写完整'); return;}
+        if(!this.end|| !this.start.end) {this.$toast('请将目的地填写完整'); return;}
       if (!this.time) {
         this.$toast("请将出发时间填写完整");
         return;
