@@ -44,7 +44,7 @@
         <p>发布</p>
         <div></div>
       </van-col>
-      <van-col span="6" class="bottom-list">
+      <van-col span="6" class="bottom-list" @click="mine()">
         <van-icon name="manager-o" />
         <p>我的</p>
       </van-col>
@@ -132,6 +132,9 @@ export default {
       let crtTime = new Date(time);
       this.time = this.dateFtt("yyyy-MM-dd hh:mm:ss", crtTime);
       this.showTime = false;
+    },
+    mine(){
+        this.bridgeFnc.openNewUrl(window.location.origin+window.location.pathname+'#/mine')
     },
     cancel() {
       this.showTime = false;

@@ -6,7 +6,7 @@
           <p class="address-time">10/28 8:00</p>
           <div class="ad">
             <p>青剑湖花园南门</p>
-            <img src />
+            <img src="//pic5.40017.cn/03/000/2b/ba/rBANB12x7GOAGzBLAAAEEGTk4K8756.png" />
             <p>同程大厦</p>
           </div>
         </div>
@@ -91,7 +91,8 @@ export default {
 .ad img {
   display: block;
   margin: 0 10px;
-  width: 30px;
+  width: 40px;
+  height: 40px;
 }
 .address-button {
   height: 30px;
