@@ -2,6 +2,7 @@
   <div class="main">
     <van-cell-group class="name">
       <van-field
+        v-model="driverInfo.DriverName"
         required
         clearable
         label="车主姓名"
@@ -10,8 +11,10 @@
         @click-right-icon="$toast('question')"
       />
       <van-field
+        v-model="driverInfo.DITelPhone"
         required
         clearable
+        type="tel"
         label="手机号"
         right-icon="question-o"
         placeholder="请输入手机号"
@@ -20,6 +23,7 @@
     </van-cell-group>
     <van-cell-group class="che">
       <van-field
+        v-model="driverInfo.DICarType"
         required
         clearable
         label="车型"
@@ -28,6 +32,7 @@
         @click-right-icon="$toast('说明信息')"
       />
       <van-field
+        v-model="driverInfo.DICarNumber"
         required
         clearable
         label="车牌号"
@@ -36,6 +41,7 @@
         @click-right-icon="$toast('说明信息')"
       />
       <van-field
+        v-model="driverInfo.DICardNo"
         required
         clearable
         label="身份证号"
@@ -74,8 +80,21 @@
 <script>
 export default {
   data() {
+    let currUser = JSON.parse(localStorage.getItem("_userInfo"));
     return {
-      wid: ""
+      wid: "",
+      driverInfo: {
+        DriverName: currUser.UNick,
+        DIUIID: currUser.UId,
+        DITelPhone: "13856859865",
+        DICarType: "B级车",
+        DICarNumber: "苏E88888",
+        DICardNo: "3265456258954562",
+        DIDrivingLicense: "",
+        DIDrivingPermit: "",
+        DICardFront: "",
+        DICardFace: ""
+      }
     };
   },
   created() {
@@ -84,6 +103,12 @@ export default {
   },
   methods: {
     reviewcert: function() {
+      this.$post(
+        "http://10.102.144.75:8022/api/DriverInfo/Post",
+        this.driverInfo
+      ).then(data => {
+        console.log(data)
+      });
       _tc_bridge_web.open_with_close({
         param: {
           jumpUrl: location.origin + "/#/reviewcert"
