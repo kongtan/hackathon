@@ -7,7 +7,7 @@
           <van-button plain hairline type="info" class="carowner btncls" @click="carowner">我是车主</van-button>
           <van-button plain hairline type="info" class="passenger btncls">我是乘客</van-button>
         </div>
-        <p class="skip">跳过</p>
+        <p class="skip" @click="index">跳过</p>
       </div>
     </div>
   </div>
@@ -20,8 +20,11 @@ export default {
     };
   },
   methods: {
-    carowner: function() {
-      location.href = "/#/carowner"
+    carowner() {
+      location.href = "#/carowner";
+    },
+    index() {
+      location.href = "#/index";
     }
   }
 };

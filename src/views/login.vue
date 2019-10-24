@@ -13,7 +13,7 @@
         <span>{{userInfo.jobNumber}}</span>
       </div>
       <div class="pin">
-        <van-button plain type="info" class="pin-btn">去拼车</van-button>
+        <van-button plain type="info" class="pin-btn" @click="pin">去拼车</van-button>
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@ export default {
     this.userInfo = user ? JSON.parse(user) : null;
   },
   methods: {
-    login: function() {
+    login(){
       let tmpUser = {
         id:"01024",
         photo: "https://img.yzcdn.cn/vant/cat.jpeg",
@@ -40,6 +40,9 @@ export default {
       };
       this.userInfo = tmpUser;
       localStorage.setItem("_userInfo", JSON.stringify(tmpUser));
+    },
+    pin(){
+      location.href="#/identity";
     }
   }
 };

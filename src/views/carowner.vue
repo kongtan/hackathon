@@ -67,7 +67,7 @@
     </van-cell-group>
 
     <div class="submit">
-      <van-button plain hairline type="info" class="btn">提交</van-button>
+      <van-button plain hairline type="info" class="btn" @click="reviewcert">提交</van-button>
     </div>
   </div>
 </template>
@@ -81,6 +81,11 @@ export default {
   created() {
       let screenW = $(window).width();
       this.wid = (screenW-42)/2 + 'px';
+  },
+  methods: {
+      reviewcert:function(){
+          location.href = "#/reviewcert"
+      }
   },
 };
 </script>

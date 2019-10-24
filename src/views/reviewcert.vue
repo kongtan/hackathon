@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="btn">
-        <van-button plain hairline type="info" class="cls back">返回首页</van-button>
+        <van-button plain hairline type="info" class="cls back" @click="backindex">返回首页</van-button>
         <van-button plain hairline type="info" class="cls send">发布约车信息</van-button>
     </div>
   </div>
@@ -19,7 +19,12 @@ export default {
     return {
       
     };
-  }
+  },
+  methods: {
+      backindex(){
+          location.href="#/index";
+      }
+  },
 };
 </script>
 <style scoped lang="scss">
