@@ -79,14 +79,18 @@ export default {
     };
   },
   created() {
-      let screenW = $(window).width();
-      this.wid = (screenW-42)/2 + 'px';
+    let screenW = $(window).width();
+    this.wid = (screenW - 42) / 2 + "px";
   },
   methods: {
-      reviewcert:function(){
-          location.href = "#/reviewcert"
-      }
-  },
+    reviewcert: function() {
+      _tc_bridge_web.open_with_close({
+        param: {
+          jumpUrl: location.origin + "/#/reviewcert"
+        }
+      });
+    }
+  }
 };
 </script>
 <style scoped lang="scss">
