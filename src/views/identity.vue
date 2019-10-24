@@ -5,7 +5,7 @@
         <p class="tips">为了更好的提供服务，建议先选择您的身份，后期您也可以在设置里更改身份。</p>
         <div class="btn">
           <van-button plain hairline type="info" class="carowner btncls" @click="carowner">我是车主</van-button>
-          <van-button plain hairline type="info" class="passenger btncls">我是乘客</van-button>
+          <van-button plain hairline type="info" class="passenger btncls" @click="index">我是乘客</van-button>
         </div>
         <p class="skip" @click="index">跳过</p>
       </div>
@@ -21,10 +21,10 @@ export default {
   },
   methods: {
     carowner() {
-      location.href = "#/carowner";
+      this.bridgeFnc.openNewUrl(location.origin + "/#/carowner");
     },
-    index() {
-      location.href = "#/index";
+    index() {      
+      this.bridgeFnc.openNewUrl(location.origin + "/#/index");
     }
   }
 };

@@ -42,7 +42,7 @@ export default {
       localStorage.setItem("_userInfo", JSON.stringify(tmpUser));
     },
     pin(){
-      location.href="#/identity";
+      location.replace("#/identity");
     }
   }
 };
