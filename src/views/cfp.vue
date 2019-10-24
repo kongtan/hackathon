@@ -10,7 +10,7 @@
             <p>同程大厦</p>
           </div>
         </div>
-        <van-button type="default" class="address-button">接单</van-button>
+        <van-button type="default" class="address-button" @click="takeOrders()">接单</van-button>
       </div>
       <div class="usr border_b">
         <div class="usr-info">
@@ -46,8 +46,9 @@ export default {
             { showText: "查看接到的单", tagname: "tag_click_right" }
           ]
         },
-        callback: function(data) {
+        callback: data=> {
           if (data.tagname == "tag_click_right") {
+              this.bridgeFnc.openNewUrl(window.location.origin+window.location.pathname+'#/orderdetial')
           }
         }
       });
@@ -60,6 +61,9 @@ export default {
         },
         callback: function(data) {}
       });
+    },
+    takeOrders(){
+       this.showDialogT(); 
     }
   }
 };

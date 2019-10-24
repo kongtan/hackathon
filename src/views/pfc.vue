@@ -10,7 +10,7 @@
             <p>同程大厦</p>
           </div>
         </div>
-        <van-button type="default" class="address-button">搭车</van-button>
+        <van-button type="default" class="address-button" @click="takeOrders">搭车</van-button>
       </div>
       <div class="usr border_b">
         <div class="usr-info">
@@ -34,9 +34,12 @@
 <script>
 export default {
   created() {
-      this.bridgeFnc.setBar('人找车');
+    this.bridgeFnc.setBar("人找车");
   },
   methods: {
+    takeOrders() {
+      this.showDialogT();
+    },
     showDialogT() {
       _tc_bridge_util.show_tips_dialog({
         param: {
@@ -46,11 +49,14 @@ export default {
             { showText: "查看搭到的单", tagname: "tag_click_right" }
           ]
         },
-        callback: function(data) {
-            if(data.tagname=='tag_click_right'){
-                
-            }
-
+        callback: data=> {
+          if (data.tagname == "tag_click_right") {
+            this.bridgeFnc.openNewUrl(
+              window.location.origin +
+                window.location.pathname +
+                "#/orderdetial"
+            );
+          }
         }
       });
     },
@@ -60,8 +66,7 @@ export default {
           desc: "手慢啦~\n该车已经搭满了",
           btnList: [{ showText: "知道了", tagname: "tag_click_left" }]
         },
-        callback: function(data) {
-}
+        callback: function(data) {}
       });
     }
   }

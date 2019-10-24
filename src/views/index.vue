@@ -80,8 +80,8 @@
 export default {
   data() {
     return {
-      start:{},
-      end:{},
+      start: {},
+      end: {},
       active: 0,
       showAdd: false,
       username: "",
@@ -115,6 +115,18 @@ export default {
       });
     },
     find(active) {
+      if (!this.start.name) {
+        this.$toast("请将出发地填写完整");
+        return;
+      }
+      if (!this.end.name) {
+        this.$toast("请将目的地填写完整");
+        return;
+      }
+      if (!this.time) {
+        this.$toast("请将出发时间填写完整");
+        return;
+      }
       let url =
         window.location.origin +
         window.location.pathname +
@@ -133,8 +145,10 @@ export default {
       this.time = this.dateFtt("yyyy-MM-dd hh:mm:ss", crtTime);
       this.showTime = false;
     },
-    mine(){
-        this.bridgeFnc.openNewUrl(window.location.origin+window.location.pathname+'#/mine')
+    mine() {
+      this.bridgeFnc.openNewUrl(
+        window.location.origin + window.location.pathname + "#/mine"
+      );
     },
     cancel() {
       this.showTime = false;
@@ -164,28 +178,28 @@ export default {
           );
       return fmt;
     },
-  selectStart(){
-    _tc_bridge_web.open_newurl({
-      "param": {
-          "openParams": "newWindow,needSlide",
-          "jumpUrl": location.origin + "/#/location"
-      },
-      "callback": (data) => {
-        this.start = JSON.parse(JSON.parse(data.CBData).result);
-      }
-    })
-  },
-  selectEnd(){
-    _tc_bridge_web.open_newurl({
-      "param": {
-          "openParams": "newWindow,needSlide",
-          "jumpUrl": location.origin + "/#/location"
-      },
-      "callback": (data) => {
-        this.end = JSON.parse(JSON.parse(data.CBData).result);
-      }
-    })
-  }
+    selectStart() {
+      _tc_bridge_web.open_newurl({
+        param: {
+          openParams: "newWindow,needSlide",
+          jumpUrl: location.origin + "/#/location"
+        },
+        callback: data => {
+          this.start = JSON.parse(JSON.parse(data.CBData).result);
+        }
+      });
+    },
+    selectEnd() {
+      _tc_bridge_web.open_newurl({
+        param: {
+          openParams: "newWindow,needSlide",
+          jumpUrl: location.origin + "/#/location"
+        },
+        callback: data => {
+          this.end = JSON.parse(JSON.parse(data.CBData).result);
+        }
+      });
+    }
   }
 };
 </script>
