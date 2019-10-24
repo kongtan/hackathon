@@ -99,6 +99,12 @@ const routes = [
     // route level code-splitting
     component: () => import(/* webpackChunkName: "msglist" */ '../views/msglist.vue')
   },
+  {
+    path: '/location',
+    name: 'location',
+    // route level code-splitting
+    component: () => import(/* webpackChunkName: "location" */ '../views/location.vue')
+  },
 ]
 
 const router = new VueRouter({
