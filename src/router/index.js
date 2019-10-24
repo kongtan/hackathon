@@ -105,6 +105,12 @@ const routes = [
     // route level code-splitting
     component: () => import(/* webpackChunkName: "location" */ '../views/location.vue')
   },
+  {
+    path: '/mine',
+    name: 'mine',
+    // route level code-splitting
+    component: () => import(/* webpackChunkName: "mine" */ '../views/mine.vue')
+  },
 ]
 
 const router = new VueRouter({

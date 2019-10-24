@@ -6,11 +6,11 @@
           <p class="address-time">10/28 8:00</p>
           <div class="ad">
             <p>青剑湖花园南门</p>
-            <img src />
+            <img src="//pic5.40017.cn/03/000/2b/ba/rBANB12x7GOAGzBLAAAEEGTk4K8756.png" />
             <p>同程大厦</p>
           </div>
         </div>
-        <van-button type="default" class="address-button">接单</van-button>
+        <van-button type="default" class="address-button" @click="takeOrders()">接单</van-button>
       </div>
       <div class="usr border_b">
         <div class="usr-info">
@@ -46,8 +46,9 @@ export default {
             { showText: "查看接到的单", tagname: "tag_click_right" }
           ]
         },
-        callback: function(data) {
+        callback: data=> {
           if (data.tagname == "tag_click_right") {
+              this.bridgeFnc.openNewUrl(window.location.origin+window.location.pathname+'#/orderdetial')
           }
         }
       });
@@ -60,6 +61,9 @@ export default {
         },
         callback: function(data) {}
       });
+    },
+    takeOrders(){
+       this.showDialogT(); 
     }
   }
 };
@@ -91,7 +95,8 @@ export default {
 .ad img {
   display: block;
   margin: 0 10px;
-  width: 30px;
+  width: 40px;
+  height: 40px;
 }
 .address-button {
   height: 30px;

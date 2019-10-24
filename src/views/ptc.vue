@@ -2,7 +2,7 @@
   <div class="ptc">
     <div class="address">
       <van-field
-        v-model="username"
+        v-model="start"
         clickable
         readonly
         label="出发地"
@@ -12,7 +12,7 @@
         class="border_b"
       />
       <van-field
-        v-model="username"
+        v-model="end"
         readonly
         label="目的地"
         right-icon="arrow"
@@ -96,6 +96,8 @@
 export default {
   data() {
     return {
+      start: "",
+      end: "",
       usrName: "王伟",
       username: "",
       message: "",
@@ -115,13 +117,37 @@ export default {
       showTime: false
     };
   },
-  created(){
-      this.bridgeFnc.setBar('找司机');
-    },
+  created() {
+    this.bridgeFnc.setBar("找司机");
+  },
   methods: {
-      submit(){
-          this.bridgeFnc.openAndCloseUrl(window.location.origin+window.location.pathname+'?type=ptc#/releaseResult')
-      },
+    submit() {
+      if (!this.start) {
+        this.$toast("请将出发地填写完整");
+        return;
+      }
+      if (!this.end) {
+        this.$toast("请将目的地填写完整");
+        return;
+      }
+      if (!this.time) {
+        this.$toast("请将出发时间填写完整");
+        return;
+      }
+      if (!this.price) {
+        this.$toast("请将行程费用填写完整");
+        return;
+      }
+      if (!this.phone && this.phone.length == 11) {
+        this.$toast("请将手机号填写完整");
+        return;
+      }
+      this.bridgeFnc.openAndCloseUrl(
+        window.location.origin +
+          window.location.pathname +
+          "?type=ptc#/releaseResult"
+      );
+    },
     affirm(time) {
       let crtTime = new Date(time);
       this.time = this.dateFtt("yyyy-MM-dd hh:mm:ss", crtTime);

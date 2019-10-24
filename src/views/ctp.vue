@@ -2,7 +2,7 @@
   <div class="ptc">
     <div class="address">
       <van-field
-        v-model="username"
+        v-model="start"
         clickable
         readonly
         label="出发地"
@@ -12,7 +12,7 @@
         class="border_b"
       />
       <van-field
-        v-model="username"
+        v-model="end"
         readonly
         label="目的地"
         right-icon="arrow"
@@ -67,7 +67,7 @@
       show-word-limit
       class="text"
     />
-    <van-button type="info" class="button">发布约车</van-button>
+    <van-button type="info" class="button" @click="submit()">发布约车</van-button>
     <van-action-sheet v-model="showCount" :actions="actions" @select="onSelect" />
 
     <van-popup v-model="showKey" position="bottom" :style="{ height: '246px' }">
@@ -96,6 +96,8 @@
 export default {
   data() {
     return {
+      start:"",
+      end:"",
       usrName: "王伟",
       username: "",
       message: "",
@@ -128,6 +130,11 @@ export default {
       this.showTime = false;
     },
     submit(){
+        if(!this.start) {this.$toast('请将出发地填写完整'); return;}
+        if(!this.end) {this.$toast('请将目的地填写完整'); return;}
+        if(!this.time) {this.$toast('请将出发时间填写完整'); return;}
+        if(!this.price) {this.$toast('请将愿付费用填写完整'); return;}
+        if(!this.phone&&this.phone.length==11) {this.$toast('请将手机号填写完整'); return;}
           this.bridgeFnc.openAndCloseUrl(window.location.origin+window.location.pathname+'?type=ctp#/releaseResult')
       },
     dateFtt(fmt, date) {

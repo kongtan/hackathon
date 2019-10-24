@@ -6,11 +6,11 @@
           <p class="address-time">10/28 8:00</p>
           <div class="ad">
             <p>青剑湖花园南门</p>
-            <img src />
+            <img src="//pic5.40017.cn/03/000/2b/ba/rBANB12x7GOAGzBLAAAEEGTk4K8756.png" />
             <p>同程大厦</p>
           </div>
         </div>
-        <van-button type="default" class="address-button">搭车</van-button>
+        <van-button type="default" class="address-button" @click="takeOrders">搭车</van-button>
       </div>
       <div class="usr border_b">
         <div class="usr-info">
@@ -34,9 +34,12 @@
 <script>
 export default {
   created() {
-      this.bridgeFnc.setBar('人找车');
+    this.bridgeFnc.setBar("人找车");
   },
   methods: {
+    takeOrders() {
+      this.showDialogT();
+    },
     showDialogT() {
       _tc_bridge_util.show_tips_dialog({
         param: {
@@ -46,11 +49,14 @@ export default {
             { showText: "查看搭到的单", tagname: "tag_click_right" }
           ]
         },
-        callback: function(data) {
-            if(data.tagname=='tag_click_right'){
-                
-            }
-
+        callback: data=> {
+          if (data.tagname == "tag_click_right") {
+            this.bridgeFnc.openNewUrl(
+              window.location.origin +
+                window.location.pathname +
+                "#/orderdetial"
+            );
+          }
         }
       });
     },
@@ -60,8 +66,7 @@ export default {
           desc: "手慢啦~\n该车已经搭满了",
           btnList: [{ showText: "知道了", tagname: "tag_click_left" }]
         },
-        callback: function(data) {
-}
+        callback: function(data) {}
       });
     }
   }
@@ -94,7 +99,8 @@ export default {
 .ad img {
   display: block;
   margin: 0 10px;
-  width: 30px;
+  width: 40px;
+  height: 40px;
 }
 .address-button {
   height: 30px;
