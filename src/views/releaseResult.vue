@@ -9,7 +9,7 @@
     </div>
     <van-row type="flex" justify="space-around">
       <van-col span="6" style="width:40%">
-        <van-button type="default" class="button-t">返回首页</van-button>
+        <van-button type="default" class="button-t" @click="home()">返回首页</van-button>
       </van-col>
       <van-col span="6" style="width:40%">
         <van-button type="info" class="button-t">查看我发布的信息</van-button>
@@ -25,6 +25,11 @@ export default {
   created() {
     this.bridgeFnc.setBar("发布结果");
   },
+  methods:{
+      home(){
+          this.bridgeFnc.closeWebView();
+      }
+  }
 };
 </script>
 <style scoped>

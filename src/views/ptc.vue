@@ -120,7 +120,7 @@ export default {
     },
   methods: {
       submit(){
-          this.bridgeFnc.openAndCloseUrl(window.location.origin+window.location.pathname+'#/releaseResult')
+          this.bridgeFnc.openAndCloseUrl(window.location.origin+window.location.pathname+'?type=ptc#/releaseResult')
       },
     affirm(time) {
       let crtTime = new Date(time);

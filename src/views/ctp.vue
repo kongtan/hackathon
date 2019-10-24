@@ -127,6 +127,9 @@ export default {
     cancel() {
       this.showTime = false;
     },
+    submit(){
+          this.bridgeFnc.openAndCloseUrl(window.location.origin+window.location.pathname+'?type=ctp#/releaseResult')
+      },
     dateFtt(fmt, date) {
       var o = {
         "M+": date.getMonth() + 1, //月份

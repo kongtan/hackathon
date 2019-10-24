@@ -7,32 +7,32 @@
           <van-tab title="司机"></van-tab>
         </van-tabs>
         <van-field
-        v-model="username"
-        clickable
-        readonly
-        label="出发地"
-        placeholder="选择出发地"
-        @click="$toast('question')"
-        class="border_b"
-      />
-      <van-field
-        v-model="username"
-        readonly
-        label="目的地"
-        placeholder="选择目的地"
-        @click="$toast('question')"
-        class="border_b"
-      />
-      <van-field
-        v-model="time"
-        readonly
-        label="出发时间"
-        placeholder="选择出发时间"
-        @click="showTime=true"
-        class="border_b"
-      />
+          v-model="username"
+          clickable
+          readonly
+          label="出发地"
+          placeholder="选择出发地"
+          @click="$toast('question')"
+          class="border_b"
+        />
+        <van-field
+          v-model="username"
+          readonly
+          label="目的地"
+          placeholder="选择目的地"
+          @click="$toast('question')"
+          class="border_b"
+        />
+        <van-field
+          v-model="time"
+          readonly
+          label="出发时间"
+          placeholder="选择出发时间"
+          @click="showTime=true"
+          class="border_b"
+        />
       </div>
-      <van-button type="info" class="btn">{{active==0?'找司机':'找乘客'}}</van-button>
+      <van-button type="info" class="btn" @click="find(active)">{{active==0?'找司机':'找乘客'}}</van-button>
     </div>
     <van-row type="flex" justify="space-around" class="bottom">
       <van-col span="6" class="bottom-list">
@@ -64,20 +64,16 @@
         </van-row>
       </div>
     </van-popup>
-    <van-popup
-  v-model="showTime"
-  position="bottom"
-  :style="{ height: '264px' }"
->
-<van-datetime-picker
-  v-model="currentDate"
-  type="datetime"
-  :min-date="minDate"
-  :max-date="maxDate"
-  @confirm="affirm"
-  @cancel="cancel"
-/>
-</van-popup>
+    <van-popup v-model="showTime" position="bottom" :style="{ height: '264px' }">
+      <van-datetime-picker
+        v-model="currentDate"
+        type="datetime"
+        :min-date="minDate"
+        :max-date="maxDate"
+        @confirm="affirm"
+        @cancel="cancel"
+      />
+    </van-popup>
   </div>
 </template>
 <script>
@@ -86,65 +82,83 @@ export default {
     return {
       active: 0,
       showAdd: false,
-      username:"",
-      time:"",
-      showTime:false,
+      username: "",
+      time: "",
+      showTime: false,
       minHour: 10,
       maxHour: 20,
       minDate: new Date(),
       maxDate: new Date(2023, 10, 1),
-      currentDate: new Date(),
+      currentDate: new Date()
     };
   },
-  created(){
-this.setBar()
+  created() {
+    this.setBar();
   },
   methods: {
-      setBar(){
-          console.log(this.bridgeFnc)
-          _tc_bridge_bar.set_navbar({
-    "param": {
-        "center":[{"value":"艺同拼车"}],
-        "right": [{"tagname": "tag_click_msg",  "icon": "i_msg","hotMark":'true'}]
-    },
-    callback: data=> {
-        if(data.tagname=="tag_click_msg"){
-            this.bridgeFnc.openNewUrl(window.location.origin+window.location.pathname+'#/msglist')
+    setBar() {
+      console.log(this.bridgeFnc);
+      _tc_bridge_bar.set_navbar({
+        param: {
+          center: [{ value: "艺同拼车" }],
+          right: [{ tagname: "tag_click_msg", icon: "i_msg", hotMark: "true" }]
+        },
+        callback: data => {
+          if (data.tagname == "tag_click_msg") {
+            this.bridgeFnc.openNewUrl(
+              window.location.origin + window.location.pathname + "#/msglist"
+            );
+          }
         }
-    }
-})
-      },
+      });
+    },
+    find(active) {
+      let url =
+        window.location.origin +
+        window.location.pathname +
+        "?start=xxx&end=xxx&time=xxx#/" +
+        (active == 0 ? "pfc" : "cfp");
+      this.bridgeFnc.openNewUrl(url);
+    },
     topc(type) {
       let hash = type == 1 ? "#/ptc" : "#/ctp";
       this.showAdd = false;
-      let url=window.location.origin+window.location.pathname+hash;
-      this.bridgeFnc.openNewUrl(url)
+      let url = window.location.origin + window.location.pathname + hash;
+      this.bridgeFnc.openNewUrl(url);
     },
-     affirm(time){
-let crtTime = new Date(time);
-this.time=this.dateFtt("yyyy-MM-dd hh:mm:ss",crtTime);
-this.showTime=false;
-      },
-      cancel(){
-          this.showTime=false;
-      },
-      dateFtt(fmt,date){
-          var o = { 
- "M+" : date.getMonth()+1,     //月份 
- "d+" : date.getDate(),     //日 
- "h+" : date.getHours(),     //小时 
- "m+" : date.getMinutes(),     //分 
- "s+" : date.getSeconds(),     //秒 
- "q+" : Math.floor((date.getMonth()+3)/3), //季度 
- "S" : date.getMilliseconds()    //毫秒 
- }; 
- if(/(y+)/.test(fmt)) 
- fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length)); 
- for(var k in o) 
- if(new RegExp("("+ k +")").test(fmt)) 
- fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length))); 
- return fmt;
-      }
+    affirm(time) {
+      let crtTime = new Date(time);
+      this.time = this.dateFtt("yyyy-MM-dd hh:mm:ss", crtTime);
+      this.showTime = false;
+    },
+    cancel() {
+      this.showTime = false;
+    },
+    dateFtt(fmt, date) {
+      var o = {
+        "M+": date.getMonth() + 1, //月份
+        "d+": date.getDate(), //日
+        "h+": date.getHours(), //小时
+        "m+": date.getMinutes(), //分
+        "s+": date.getSeconds(), //秒
+        "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+        S: date.getMilliseconds() //毫秒
+      };
+      if (/(y+)/.test(fmt))
+        fmt = fmt.replace(
+          RegExp.$1,
+          (date.getFullYear() + "").substr(4 - RegExp.$1.length)
+        );
+      for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt))
+          fmt = fmt.replace(
+            RegExp.$1,
+            RegExp.$1.length == 1
+              ? o[k]
+              : ("00" + o[k]).substr(("" + o[k]).length)
+          );
+      return fmt;
+    }
   }
 };
 </script>
@@ -201,9 +215,9 @@ this.showTime=false;
   -webkit-box-orient: vertical;
   -webkit-box-pack: center;
 }
-.btn{
-    width: 80%;
-    display: block;
-    margin-top: 10px;
+.btn {
+  width: 80%;
+  display: block;
+  margin-top: 10px;
 }
 </style>   

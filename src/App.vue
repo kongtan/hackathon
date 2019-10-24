@@ -4,9 +4,11 @@
   </div>
 </template>
 <script>
+import FastClick from '@/utils/fastClick.js'
 export default {
   created(){
     this.bridgeFnc.banScroll();
+    FastClick.attach(document.body);
   }
 }
 </script>
