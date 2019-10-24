@@ -16,16 +16,30 @@
         </div>
         <p class="remark">备注：希望找个老司机，开车不抽烟的</p>
       </van-cell>
+      <van-cell v-if="categroy=='2'">
+        <div class="passager">
+          <p class="info">乘客1：王小伟ww36642</p>
+          <p class="call">联系他</p>
+        </div>
+        <div class="passager">
+          <p class="info">乘客2：王大伟ww36643</p>
+          <p class="call">联系他</p>
+        </div>
+      </van-cell>
     </van-cell-group>
     <van-cell-group class="map-box">
       <div id="container" tabindex="0"></div>
     </van-cell-group>
+
     <div class="submit" v-if="categroy=='1'&&orderStatus=='1'">
       <van-button plain hairline type="info" class="btn" @click="cancel">取消订单</van-button>
     </div>
     <div class="submit" v-if="categroy=='1'&&orderStatus=='2'">
       <van-button plain hairline type="info" class="btnCancel" @click="cancel">取消订单</van-button>
       <van-button plain hairline type="info" class="btnCall" @click="callDriver">联系司机</van-button>
+    </div>
+    <div class="submit" v-if="categroy=='2'">
+      <van-button plain hairline type="info" class="btn" @click="cancel2">取消订单</van-button>
     </div>
     <van-popup v-model="optionsShow" closeable position="bottom" :style="{ height: '20%' }">
       <div class="edit">
@@ -89,6 +103,9 @@ export default {
     },
     cancel() {
       this.optionsShow = true;
+    },
+    cancel2(data){
+        console.log(data)
     },
     toCancel(data) {
       console.log(data);
@@ -170,6 +187,17 @@ export default {
   .remark {
     font-size: 12px;
     color: #666;
+  }
+  .passager {
+    display: -webkit-box;
+    .info {
+      font-size: 14px;
+      color: #333;
+    }
+    .call {
+      padding-left: 20px;
+      color: #1989fa;
+    }
   }
 }
 </style>
