@@ -1,44 +1,38 @@
 <template>
   <div class="index">
     <div class="main">
-      <van-tabs v-model="active" class="border_b bar">
-        <van-tab title="人找车"></van-tab>
-        <van-tab title="车找人"></van-tab>
-      </van-tabs>
-      <van-row type="flex" justify="space-around" class="filter border_b">
-        <van-col span="6">
-          <input type="text" placeholder="请输入出发地" />
-        </van-col>
-        <van-col span="6">
-          <input type="text" placeholder="请输入目的地" />
-        </van-col>
-        <van-col span="6" class="sooner">
-          <p>出发 早-晚</p>
-          <van-icon name="arrow-down" />
-        </van-col>
-      </van-row>
-      <div class="lists">
-        <div class="list border_t">
-          <div class="address border_b">
-            <div class="model">
-              <p>8：00</p>
-              <p>石湖东路</p>
-            </div>
-            <img src />
-            <div class="model">
-              <p>9：45</p>
-              <p>同程大厦</p>
-            </div>
-          </div>
-          <div class="user border_b">
-              <van-row type="flex" justify="space-bteween" class="user-info">
-                <van-col span="12">乘客：{{"王伟"}}</van-col>
-                <van-col span="12">需求：{{"1"}}个座位</van-col>
-              </van-row>
-            <p>备注：{{"1个座位、希望找老司机、开车不抽烟的"}}</p>
-          </div>
-        </div>
+      <div class="circle">
+        <van-tabs v-model="active" class="border_b bar">
+          <van-tab title="乘客"></van-tab>
+          <van-tab title="司机"></van-tab>
+        </van-tabs>
+        <van-field
+        v-model="username"
+        clickable
+        readonly
+        label="出发地"
+        placeholder="选择出发地"
+        @click="$toast('question')"
+        class="border_b"
+      />
+      <van-field
+        v-model="username"
+        readonly
+        label="目的地"
+        placeholder="选择目的地"
+        @click="$toast('question')"
+        class="border_b"
+      />
+      <van-field
+        v-model="time"
+        readonly
+        label="出发时间"
+        placeholder="选择出发时间"
+        @click="showTime=true"
+        class="border_b"
+      />
       </div>
+      <van-button type="info" class="btn">{{active==0?'找司机':'找乘客'}}</van-button>
     </div>
     <van-row type="flex" justify="space-around" class="bottom">
       <van-col span="6" class="bottom-list">
@@ -56,13 +50,13 @@
       </van-col>
     </van-row>
     <van-popup v-model="showAdd" closeable position="bottom" :style="{ height: '20%' }">
-      <div class="edit" @touchstart="showAdd=false">
+      <div class="edit">
         <van-row type="flex" justify="space-around">
-          <van-col span="6" @click="window.location.href='/#/ptc'">
+          <van-col span="6" @click="topc(1)">
             <van-icon name="logistics" />
             <p>人找车</p>
           </van-col>
-          <van-col span="6">
+          <van-col span="6" @click="topc(2)">
             <van-icon name="friends-o" />
             <p>车找人</p>
             <div></div>
@@ -70,17 +64,71 @@
         </van-row>
       </div>
     </van-popup>
+    <van-popup
+  v-model="showTime"
+  position="bottom"
+  :style="{ height: '264px' }"
+>
+<van-datetime-picker
+  v-model="currentDate"
+  type="datetime"
+  :min-date="minDate"
+  :max-date="maxDate"
+  @confirm="affirm"
+  @cancel="cancel"
+/>
+</van-popup>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      active: 2,
-      showAdd: false
+      active: 0,
+      showAdd: false,
+      username:"",
+      time:"",
+      showTime:false,
+      minHour: 10,
+      maxHour: 20,
+      minDate: new Date(),
+      maxDate: new Date(2023, 10, 1),
+      currentDate: new Date(),
     };
   },
-  methods: {}
+  methods: {
+    topc(type) {
+      console.log(1);
+      let hash = type == 1 ? "#/pfc" : "#/cfp";
+      this.showAdd = false;
+      window.location.href = hash;
+    },
+     affirm(time){
+let crtTime = new Date(time);
+this.time=this.dateFtt("yyyy-MM-dd hh:mm:ss",crtTime);
+this.showTime=false;
+      },
+      cancel(){
+          this.showTime=false;
+      },
+      dateFtt(fmt,date){
+          var o = { 
+ "M+" : date.getMonth()+1,     //月份 
+ "d+" : date.getDate(),     //日 
+ "h+" : date.getHours(),     //小时 
+ "m+" : date.getMinutes(),     //分 
+ "s+" : date.getSeconds(),     //秒 
+ "q+" : Math.floor((date.getMonth()+3)/3), //季度 
+ "S" : date.getMilliseconds()    //毫秒 
+ }; 
+ if(/(y+)/.test(fmt)) 
+ fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+ for(var k in o) 
+ if(new RegExp("("+ k +")").test(fmt)) 
+ fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length))); 
+ return fmt;
+      }
+  }
 };
 </script>
 <style scoped>
@@ -95,8 +143,8 @@ export default {
   right: 0;
   bottom: 0;
 }
-.bar{
-    -webkit-box-flex: 0;
+.bar {
+  -webkit-box-flex: 0;
 }
 .main {
   -webkit-box-flex: 1;
@@ -104,54 +152,13 @@ export default {
   display: -webkit-box;
   /* autoprefixer: ignore next */
   -webkit-box-orient: vertical;
-}
-.filter {
-  background: #fff;
-  -webkit-box-flex: 0;
-}
-.sooner {
-  display: -webkit-box;
   -webkit-box-align: center;
-  -webkit-box-pack: just;
+  -webkit-box-pack: center;
 }
-.lists {
-    -webkit-box-flex: 1;
-    overflow: scroll;
-    padding-top: 10px;
+.circle {
+  width: 80%;
 }
-.list {
-  background: #fff;
-  margin-bottom: 10px;
-}
-.address {
-  display: -webkit-box;
-  -webkit-box-align: center;
-  -webkit-box-pack: justify;
-  padding: 0 20px;
-}
-.model {
-  text-align: left;
-  font-size: 16px;
-  padding: 10px 0;
-}
-.model p:nth-of-type(1) {
-  font-weight: bold;
-  margin-bottom: 6px;
-}
-.model:nth-last-of-type(1) {
-  text-align: right;
-}
-.user {
-  padding: 10px 20px;
-  text-align: left;
-  font-size: 14px;
-}
-.user-info {
-  margin-bottom: 6px;
-}
-.user-info div:nth-of-type(2){
-    text-align: right;
-}
+
 .bottom {
   width: 100%;
   background: #fff;
@@ -176,5 +183,10 @@ export default {
   /* autoprefixer: ignore next */
   -webkit-box-orient: vertical;
   -webkit-box-pack: center;
+}
+.btn{
+    width: 80%;
+    display: block;
+    margin-top: 10px;
 }
 </style>   

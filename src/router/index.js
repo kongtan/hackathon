@@ -76,6 +76,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "ptc" */ '../views/ptc.vue')
   },
   {
+    path: '/ctp',
+    name: 'ctp',
+    // route level code-splitting
+    component: () => import(/* webpackChunkName: "ctp" */ '../views/ctp.vue')
+  },
+  {
     path: '/pfc',
     name: 'pfc',
     // route level code-splitting
