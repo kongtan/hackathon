@@ -1,16 +1,16 @@
 <template>
   <div class="main">
     <div class="name">艺同拼车</div>
-    <div v-if="!userInfo">
+    <div v-if="!userInfo||!userInfo.UId>0">
       <van-button type="info" class="login-btn" @click="login">iOA授权登陆</van-button>
     </div>
-    <div v-if="userInfo">
+    <div v-if="userInfo&&userInfo.UId>0">
       <div class="photo">
-        <van-image round width="60" height="60" :src="userInfo.photo" />
+        <van-image round width="60" height="60" :src="userInfo.UPhoto" />
       </div>
       <div class="xm-gh">
-        <span class="xm">{{userInfo.name}}</span>
-        <span>{{userInfo.jobNumber}}</span>
+        <span class="xm">{{userInfo.UNick}}</span>
+        <span>{{userInfo.UWorkNumber}}</span>
       </div>
       <div class="pin">
         <van-button plain type="info" class="pin-btn" @click="pin">去拼车</van-button>
@@ -28,20 +28,23 @@ export default {
   },
   created() {
     let user = localStorage.getItem("_userInfo");
+    console.log(user);
     this.userInfo = user ? JSON.parse(user) : null;
   },
   methods: {
-    login(){
-      let tmpUser = {
-        id:"01024",
-        photo: "https://img.yzcdn.cn/vant/cat.jpeg",
-        jobNumber: "01024",
-        name: "同程程"
-      };
-      this.userInfo = tmpUser;
-      localStorage.setItem("_userInfo", JSON.stringify(tmpUser));
+    login() {
+      this.$post("http://10.102.144.75:8022/api/member/post", {
+        workNum: "07279",
+        password: "123"
+      }).then(data => {
+        if (data && data.HackRspCode == 0) {
+          let tmpUser = data.HackBody.user;
+          this.userInfo = tmpUser;
+          localStorage.setItem("_userInfo", JSON.stringify(tmpUser));
+        }
+      });
     },
-    pin(){
+    pin() {
       location.replace("#/identity");
     }
   }
