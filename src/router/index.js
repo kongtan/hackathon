@@ -111,6 +111,12 @@ const routes = [
     // route level code-splitting
     component: () => import(/* webpackChunkName: "mine" */ '../views/mine.vue')
   },
+  {
+    path: '/orderdetail',
+    name: 'orderdetail',
+    // route level code-splitting
+    component: () => import(/* webpackChunkName: "orderdetail" */ '../views/orderDetail.vue')
+  },
 ]
 
 const router = new VueRouter({
