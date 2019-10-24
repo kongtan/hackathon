@@ -96,6 +96,7 @@ export default {
   },
   created() {
     this.setBar();
+    this.$post('http://10.102.144.75:2019/api/Member',{"workNum":"07279","password":"123"}).then(data=>{console.log(data)})
   },
   methods: {
     setBar() {
