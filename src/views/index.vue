@@ -57,11 +57,11 @@
           <van-row type="flex" justify="space-around">
         <van-col span="6">
           <van-icon name="logistics" />
-          <p>拼车</p>
+          <p>人找车</p>
         </van-col>
         <van-col span="6">
           <van-icon name="edit" />
-          <p>发布</p>
+          <p>车找人</p>
           <div></div>
         </van-col>
       </van-row>
