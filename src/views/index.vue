@@ -96,7 +96,24 @@ export default {
       currentDate: new Date(),
     };
   },
+  created(){
+this.setBar()
+  },
   methods: {
+      setBar(){
+          console.log(this.bridgeFnc)
+          _tc_bridge_bar.set_navbar({
+    "param": {
+        "center":[{"value":"艺同拼车"}],
+        "right": [{"tagname": "tag_click_msg",  "icon": "i_msg","hotMark":'true'}]
+    },
+    callback: data=> {
+        if(data.tagname=="tag_click_msg"){
+            this.bridgeFnc.openNewUrl('http://www.baidu.com')
+        }
+    }
+})
+      },
     topc(type) {
       console.log(1);
       let hash = type == 1 ? "#/pfc" : "#/cfp";

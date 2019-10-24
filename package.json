@@ -7,6 +7,8 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "bridgefnc": "^2.0.1",
+    "commonfnc": "^2.0.2",
     "core-js": "^3.3.2",
     "h5-global": "^1.2.4",
     "vant": "^2.2.9",
