@@ -32,6 +32,7 @@ export default {
     };
   },
   created() {
+    this.setBar();
     let gdmap = document.getElementById("gdmap");
     if (!gdmap) {
       let new_elem = document.createElement("script");
@@ -50,6 +51,26 @@ export default {
     }
   },
   methods: {
+    setBar() {
+      _tc_bridge_bar.set_navbar({
+        param: {
+          center: [{ value: "艺同拼车" }],
+          right: [{ tagname: "tag_click_ok", value: "确认" }]
+        },
+        callback: data => {
+          if (data.tagname == "tag_click_ok") {   
+            let selectItem = this.localList.find(item => item.isSelect);
+            _tc_bridge_web.data_callback({
+              param: {
+                result: JSON.stringify(selectItem)
+              },
+              callback: function(data) {}
+            });
+            //this.bridgeFnc.openNewUrl("http://www.baidu.com");
+          }
+        }
+      });
+    },
     init() {
       var that = this;
       //创建地图
@@ -68,6 +89,7 @@ export default {
         });
         map.addControl(geolocation);
         geolocation.getCurrentPosition(function(status, result) {
+          that.setBar();
           if (status == "complete") {
             that.geoloOnComplete(result);
           } else {

@@ -7,20 +7,20 @@
           <van-tab title="司机"></van-tab>
         </van-tabs>
         <van-field
-          v-model="username"
+          v-model="start.name"
           clickable
           readonly
           label="出发地"
           placeholder="选择出发地"
-          @click="$toast('question')"
+          @click="selectStart"
           class="border_b"
         />
         <van-field
-          v-model="username"
+          v-model="end.name"
           readonly
           label="目的地"
           placeholder="选择目的地"
-          @click="$toast('question')"
+          @click="selectEnd"
           class="border_b"
         />
         <van-field
@@ -80,6 +80,8 @@
 export default {
   data() {
     return {
+      start:{},
+      end:{},
       active: 0,
       showAdd: false,
       username: "",
@@ -158,7 +160,29 @@ export default {
               : ("00" + o[k]).substr(("" + o[k]).length)
           );
       return fmt;
-    }
+    },
+  selectStart(){
+    _tc_bridge_web.open_newurl({
+      "param": {
+          "openParams": "newWindow,needSlide",
+          "jumpUrl": location.origin + "/#/location"
+      },
+      "callback": (data) => {
+        this.start = JSON.parse(JSON.parse(data.CBData).result);
+      }
+    })
+  },
+  selectEnd(){
+    _tc_bridge_web.open_newurl({
+      "param": {
+          "openParams": "newWindow,needSlide",
+          "jumpUrl": location.origin + "/#/location"
+      },
+      "callback": (data) => {
+        this.end = JSON.parse(JSON.parse(data.CBData).result);
+      }
+    })
+  }
   }
 };
 </script>
