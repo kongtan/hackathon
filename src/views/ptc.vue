@@ -2,22 +2,22 @@
   <div class="ptc">
     <div class="address">
       <van-field
-        v-model="start"
+        v-model="start.name"
         clickable
         readonly
         label="出发地"
         right-icon="arrow"
         placeholder="选择出发地"
-        @click="$toast('question')"
+        @click="selectStart"
         class="border_b"
       />
       <van-field
-        v-model="end"
+        v-model="end.name"
         readonly
         label="目的地"
         right-icon="arrow"
         placeholder="选择目的地"
-        @click="$toast('question')"
+        @click="selectEnd"
         class="border_b"
       />
       <van-field
@@ -96,8 +96,8 @@
 export default {
   data() {
     return {
-      start: "",
-      end: "",
+      start: {},
+      end: {},
       usrName: "王伟",
       username: "",
       message: "",
@@ -198,6 +198,28 @@ export default {
       if (this.keyType == 1)
         this.price = this.price.substring(0, this.price.length - 1);
       else this.phone = this.phone.substring(0, this.phone.length - 1);
+    },
+    selectStart() {
+      _tc_bridge_web.open_newurl({
+        param: {
+          openParams: "newWindow,needSlide",
+          jumpUrl: location.origin + "/#/location"
+        },
+        callback: data => {
+          this.start = JSON.parse(JSON.parse(data.CBData).result);
+        }
+      });
+    },
+    selectEnd() {
+      _tc_bridge_web.open_newurl({
+        param: {
+          openParams: "newWindow,needSlide",
+          jumpUrl: location.origin + "/#/location"
+        },
+        callback: data => {
+          this.end = JSON.parse(JSON.parse(data.CBData).result);
+        }
+      });
     }
   }
 };
