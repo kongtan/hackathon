@@ -32,7 +32,40 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  created() {
+      this.bridgeFnc.setBar('人找车');
+  },
+  methods: {
+    showDialogT() {
+      _tc_bridge_util.show_tips_dialog({
+        param: {
+          desc: "真棒，搭到啦~\n记得提前联系司机哦~",
+          btnList: [
+            { showText: "取消", tagname: "tag_click_left" },
+            { showText: "查看搭到的单", tagname: "tag_click_right" }
+          ]
+        },
+        callback: function(data) {
+            if(data.tagname=='tag_click_right'){
+                
+            }
+
+        }
+      });
+    },
+    showDialogO() {
+      _tc_bridge_util.show_tips_dialog({
+        param: {
+          desc: "手慢啦~\n该车已经搭满了",
+          btnList: [{ showText: "知道了", tagname: "tag_click_left" }]
+        },
+        callback: function(data) {
+}
+      });
+    }
+  }
+};
 </script>
 <style scoped>
 .list {

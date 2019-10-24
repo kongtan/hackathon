@@ -21,7 +21,10 @@
 export default {
   data() {
     return {};
-  }
+  },
+  created() {
+    this.bridgeFnc.setBar("发布结果");
+  },
 };
 </script>
 <style scoped>

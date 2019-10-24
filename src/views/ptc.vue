@@ -67,7 +67,7 @@
       show-word-limit
       class="text"
     />
-    <van-button type="info" class="button">发布约车</van-button>
+    <van-button type="info" class="button" @click="submit()">发布约车</van-button>
     <van-action-sheet v-model="showCount" :actions="actions" @select="onSelect" />
 
     <van-popup v-model="showKey" position="bottom" :style="{ height: '246px' }">
@@ -115,7 +115,13 @@ export default {
       showTime: false
     };
   },
+  created(){
+      this.bridgeFnc.setBar('找司机');
+    },
   methods: {
+      submit(){
+          this.bridgeFnc.openAndCloseUrl(window.location.origin+window.location.pathname+'#/releaseResult')
+      },
     affirm(time) {
       let crtTime = new Date(time);
       this.time = this.dateFtt("yyyy-MM-dd hh:mm:ss", crtTime);

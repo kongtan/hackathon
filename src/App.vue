@@ -3,6 +3,13 @@
     <router-view/>
   </div>
 </template>
+<script>
+export default {
+  created(){
+    this.bridgeFnc.banScroll();
+  }
+}
+</script>
 
 <style lang="scss">
 input{

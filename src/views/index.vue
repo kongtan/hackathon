@@ -109,16 +109,16 @@ this.setBar()
     },
     callback: data=> {
         if(data.tagname=="tag_click_msg"){
-            this.bridgeFnc.openNewUrl('http://www.baidu.com')
+            this.bridgeFnc.openNewUrl(window.location.origin+window.location.pathname+'#/msglist')
         }
     }
 })
       },
     topc(type) {
-      console.log(1);
-      let hash = type == 1 ? "#/pfc" : "#/cfp";
+      let hash = type == 1 ? "#/ptc" : "#/ctp";
       this.showAdd = false;
-      window.location.href = hash;
+      let url=window.location.origin+window.location.pathname+hash;
+      this.bridgeFnc.openNewUrl(url)
     },
      affirm(time){
 let crtTime = new Date(time);
