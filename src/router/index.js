@@ -52,10 +52,10 @@ const routes = [
     component: () => import(/* webpackChunkName: "identity" */ '../views/identity.vue')
   },
   {
-    path: '/carowner',
-    name: 'carowner',
+    path: '/releaseResult',
+    name: 'releaseResult',
     // route level code-splitting
-    component: () => import(/* webpackChunkName: "carowner" */ '../views/carowner.vue')
+    component: () => import(/* webpackChunkName: "releaseResult" */ '../views/releaseResult.vue')
   },
   {
     path: '/reviewcert',
