@@ -75,6 +75,10 @@
     <div class="submit">
       <van-button plain hairline type="info" class="btn" @click="reviewcert">提交</van-button>
     </div>
+
+    <van-overlay :show="show">
+      <van-loading type="spinner" />
+    </van-overlay>
   </div>
 </template>
 <script>
@@ -83,6 +87,7 @@ export default {
     let currUser = JSON.parse(localStorage.getItem("_userInfo"));
     return {
       wid: "",
+      show: false,
       driverInfo: {
         DriverName: currUser.UNick,
         DIUIID: currUser.UId,
@@ -103,16 +108,17 @@ export default {
   },
   methods: {
     reviewcert: function() {
+      this.show = true;
       this.$post(
         "http://10.102.144.75:8022/api/DriverInfo/Post",
         this.driverInfo
       ).then(data => {
-        console.log(data)
-      });
-      _tc_bridge_web.open_with_close({
-        param: {
-          jumpUrl: location.origin + "/#/reviewcert"
-        }
+        this.show = false;
+        _tc_bridge_web.open_with_close({
+          param: {
+            jumpUrl: location.origin + "/#/reviewcert"
+          }
+        });
       });
     }
   }
