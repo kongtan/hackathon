@@ -14,7 +14,38 @@ const routes = [
     name: 'test',
     // route level code-splitting
     component: () => import(/* webpackChunkName: "test" */ '../views/test.vue')
-  }
+  },
+  {
+    path: '/index',
+    name: 'index',
+    // route level code-splitting
+    component: () => import(/* webpackChunkName: "index" */ '../views/index.vue')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    // route level code-splitting
+    component: () => import(/* webpackChunkName: "login" */ '../views/login.vue')
+  },
+  {
+    path: '/list',
+    name: 'list',
+    // route level code-splitting
+    component: () => import(/* webpackChunkName: "list" */ '../views/list.vue')
+  },
+  {
+    path: '/register',
+    name: 'register',
+    // route level code-splitting
+    component: () => import(/* webpackChunkName: "register" */ '../views/register.vue')
+  },
+  {
+    path: '/search',
+    name: 'search',
+    // route level code-splitting
+    component: () => import(/* webpackChunkName: "search" */ '../views/search.vue')
+  },
+  
 ]
 
 const router = new VueRouter({
