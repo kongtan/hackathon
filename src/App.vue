@@ -5,14 +5,26 @@
 </template>
 
 <style lang="scss">
+input{
+  border:0;
+}
+.van-hairline--bottom::after{
+  border-color:#e0e0e0 !important;
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
 }
-
+.van-tab{
+  font-size: 16px !important;
+}
+.van-tab--active{
+}
+.van-tabs__line{
+  background: #1989fa !important;
+}
 #nav {
   padding: 30px;
 
