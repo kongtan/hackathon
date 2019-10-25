@@ -31,6 +31,7 @@
       />
       <van-field
         v-model="price"
+        readonly
         label="行程费用（每人）"
         placeholder="请输入行程收取的车费（元）"
         @click="showKey=true;keyType=1"

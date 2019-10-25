@@ -30,6 +30,7 @@
         class="border_b"
       />
       <van-field
+        readonly
         v-model="price"
         label="愿付费用"
         placeholder="请输入愿意承担的车费（元）"

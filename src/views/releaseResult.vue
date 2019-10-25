@@ -12,7 +12,7 @@
         <van-button type="default" class="button-t" @click="home()">返回首页</van-button>
       </van-col>
       <van-col span="6" style="width:40%">
-        <van-button type="info" class="button-t">查看我发布的信息</van-button>
+        <van-button type="info" class="button-t" @click="mine">查看我发布的信息</van-button>
       </van-col>
     </van-row>
   </div>
@@ -28,6 +28,13 @@ export default {
   methods:{
       home(){
           this.bridgeFnc.closeWebView();
+      },
+      mine(){
+        this.bridgeFnc.openAndCloseUrl(
+            window.location.origin +
+              window.location.pathname +
+              "#/mine"
+          );
       }
   }
 };
