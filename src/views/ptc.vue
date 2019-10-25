@@ -39,7 +39,7 @@
       />
     </div>
     <div class="user">
-      <van-field v-model="userInfo.UNick" readonly label="司机姓名" class="border_b" />
+      <van-field v-model="userInfo.UNick" readonly label="乘客姓名" class="border_b" />
       <van-field
         v-model="phone"
         readonly
