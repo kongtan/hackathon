@@ -266,11 +266,11 @@ export default {
 
 #tipinput {
   width: 100%;
-  height: 30px;
-  border: 1px solid #ccc;
+  height: 44px;
+  border:1px solid #e4e4e4;
   border-radius: 5px;
   font-size: 16px;
-  line-height: 30px;
+  line-height: 44px;
   padding: 0 7px;
   box-sizing: border-box;
 }
@@ -278,7 +278,7 @@ export default {
 #clearSearchBtn {
   position: absolute;
   right: 0;
-  top: 0;
+  top: 7px;
   margin: auto;
   width: 20px;
   height: 20px;
