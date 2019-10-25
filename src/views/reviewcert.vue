@@ -9,7 +9,7 @@
     </div>
     <div class="btn">
       <van-button plain hairline type="info" class="cls back" @click="backindex">返回首页</van-button>
-      <van-button plain hairline type="info" class="cls send" @click="send">发布约车信息</van-button>
+      <van-button plain hairline type="info" class="cls send" @click="send">发布约乘信息</van-button>
     </div>
   </div>
 </template>
