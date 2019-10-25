@@ -1,10 +1,10 @@
 <template>
   <div class="page">
     <van-cell-group>
-      <van-cell title="来源：我发布的找司机订单" value="等待司机接单" />
+      <van-cell class="source" title="来源：我发布的找司机订单" value="等待司机接单" />
       <van-cell class="time-dest">
         <p class="time">10/28 08:00</p>
-        <p class="dest">青剑湖花园南门--->同程大厦</p>
+        <div class="dest"><p class="adress">青剑湖花园南门</p><img class="icon" src="//pic5.40017.cn/03/000/2b/ba/rBANB12x7GOAGzBLAAAEEGTk4K8756.png" /><p class="adress">同程大厦</p></div>
       </van-cell>
       <van-cell>
         <div class="desc">
@@ -80,6 +80,7 @@ export default {
   },
   methods: {
     init() {
+      this.bridgeFnc.setBar('订单详情');
       var that = this;
       //创建地图
       map = new AMap.Map("container", {
@@ -129,6 +130,9 @@ export default {
 </script>
 <style scoped lang="scss">
 .page {
+  .source{
+    text-align: left;
+  }
   .edit {
     padding: 30px 20px;
     .item {
@@ -161,9 +165,19 @@ export default {
       font-weight: bold;
     }
     .dest {
-      padding: 10px 0;
       font-size: 18px;
       color: #666;
+      display: -webkit-box;
+    -webkit-box-align: center;
+      .adress{
+        font-size: 16px;
+        color: #333;
+        line-height: 40px;
+      }
+      .icon{
+        width: 40px;
+        height: 40px;
+      }
     }
   }
   .map-box {

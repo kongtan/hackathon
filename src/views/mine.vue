@@ -14,7 +14,7 @@
         <div class="main border_t">
             <p class="title border_b ">我的行程</p>
             <ul class="lists">
-                <li class="list border_t border_b">
+                <li class="list border_t border_b" @click="goDetail">
                     <div class="status border_b">
                         <p>来源：我发布的找司机订单</p>
                         <p>等待司机接单</p>
@@ -41,7 +41,16 @@ export default {
     },
     created(){
         this.bridgeFnc.setBar('我的');
-    }
+    },
+    methods: {
+        goDetail(){
+            this.bridgeFnc.openNewUrl(
+              window.location.origin +
+                window.location.pathname +
+                "#/orderdetail"
+            );
+        }
+    },
 }
 </script>
 <style scoped>

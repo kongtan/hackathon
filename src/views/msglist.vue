@@ -2,7 +2,7 @@
   <div>
     <div class="lists" v-if="true">
       <div class="list">
-        <img src class="pic" />
+        <img src="http://pic5.40017.cn/03/000/95/ca/rB5oQF2ydOaAKkt9AAAdmn0ZzNA978.png" class="pic" />
         <div>
           <div class="msg">
             <p>司机接单成功</p>
