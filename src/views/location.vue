@@ -267,7 +267,7 @@ export default {
 #tipinput {
   width: 100%;
   height: 44px;
-  border:1px solid #e4e4e4;
+  border:0;
   border-radius: 5px;
   font-size: 16px;
   line-height: 44px;
